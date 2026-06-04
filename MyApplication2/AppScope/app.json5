@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "com.example.digitalcommunity",
+    "bundleName": "com.example.myapplication2",
     "vendor": "example",
     "versionCode": 1000000,
     "versionName": "1.0.0",
