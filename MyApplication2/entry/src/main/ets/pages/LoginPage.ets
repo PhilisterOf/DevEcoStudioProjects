@@ -21,7 +21,6 @@ interface LoginResponse {
 @Entry
 @Component
 struct LoginPage {
-  @State message: string = 'Hello World';
   @State phonenumber: string = '';
   @State password: string = '';
 
@@ -39,7 +38,8 @@ struct LoginPage {
       priority: 1, // 可选，默认为1。
       // 开发者根据自身业务需要添加header字段。
       // TODO: 1
-      header: {'Content-Type':'application/json'},
+      header: { 'Content-Type': 'application/json' },
+      // header: new Header('application/json')
       readTimeout: 60000, // 可选，默认为60000ms。
       connectTimeout: 60000, // 可选，默认为60000ms。
       usingProtocol: http.HttpProtocol.HTTP1_1, // 可选，协议类型默认值由系统自动指定。
@@ -47,27 +47,29 @@ struct LoginPage {
     };
 
     // TODO: 2
-    httpRequest.request(EXAMPLE_URL + '/api/community/user/phone/login', options, (err: Error, data: http.HttpResponse) => {
-      if (!err) {
-        // console.info('Result:' + data.result);
-        // console.info('code:' + data.responseCode);
-        // console.info('type:' + JSON.stringify(data.resultType));
-        // console.info('header:' + JSON.stringify(data.header));
-        // console.info('cookies:' + data.cookies); // 自API version 8开始支持cookie。
-        // TODO: 3
-        let res = JSON.parse(data.result as string) as LoginResponse;
-        if (res.code === 200) {
-          console.info('zzz:SUCCESS,Token:' + res.token)
-          AppStorage.SetOrCreate("key", res.token)
-          router.pushUrl({url: 'pages/Index'})
+    httpRequest.request(EXAMPLE_URL + '/api/community/user/phone/login', options,
+      (err: Error, data: http.HttpResponse) => {
+        if (!err) {
+          // console.info('Result:' + data.result);
+          // console.info('code:' + data.responseCode);
+          // console.info('type:' + JSON.stringify(data.resultType));
+          // console.info('header:' + JSON.stringify(data.header));
+          // console.info('cookies:' + data.cookies); // 自API version 8开始支持cookie。
+          // TODO: 3
+          let res = JSON.parse(data.result as string) as LoginResponse;
+          if (res.code === 200) {
+            console.info('zzz:SUCCESS,Token:' + res.token)
+            AppStorage.SetOrCreate("token", res.token)
+            router.pushUrl({ url: 'pages/MainPage' })
+          } else {
+            console.info('zzz:error:' + JSON.stringify(err));
+            // TODO: 4
+            promptAction.showToast({ message: res.msg, duration: 2000 })
+          }
         } else {
           console.info('zzz:error:' + JSON.stringify(err));
-          promptAction.showToast({ message: res.msg, duration: 2000 })
         }
-      } else {
-        console.info('zzz:error:' + JSON.stringify(err));
-      }
-    });
+      });
   }
 
   build() {
@@ -89,15 +91,15 @@ struct LoginPage {
       TextInput()
         .type(InputType.PhoneNumber)
         .backgroundColor(Color.White)
-        .margin({top: "60%", left: "5%"})
+        .margin({ top: "60%", left: "5%" })
         .width('90%')
         .onChange((value: string) => {
           this.phonenumber = value;
-      })
+        })
       TextInput()
         .type(InputType.Password)
         .backgroundColor(Color.White)
-        .margin({top: "75%", left: "5%" })
+        .margin({ top: "75%", left: "5%" })
         .width('90%')
         .onChange((value: string) => {
           this.password = value;
@@ -107,7 +109,7 @@ struct LoginPage {
         .fontColor(Color.White)
         .fontSize(20)
         .backgroundColor('#007dfe')
-        .margin({top: "90%", left: "7.5%" })
+        .margin({ top: "90%", left: "7.5%" })
         .width('85%')
         .onClick(() => {
           this.login();

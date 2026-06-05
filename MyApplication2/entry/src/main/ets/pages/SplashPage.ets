@@ -3,12 +3,11 @@ import router from '@ohos.router'
 @Entry
 @Component
 struct SplashPage {
-
-  onPageShow(): void {
-    setTimeout(()=>{
-      this.getUIContext().getRouter().pushUrl({url:'pages/LoginPage'})
-    },5000)
-  }
+  // onPageShow(): void {
+  //   setTimeout(() => {
+  //     this.getUIContext().getRouter().pushUrl({ url: 'pages/LoginPage' })
+  //   }, 5000)
+  // }
 
   build() {
     Stack({ alignContent: Alignment.TopEnd }) {
@@ -24,7 +23,7 @@ struct SplashPage {
         .margin("5%")
         // TODO:
         .onClick(() => {
-          router.replace({url: 'pages/LoginPage'})
+          router.replace({ url: 'pages/LoginPage' })
         })
       Row() {
         Image($r('app.media.github'))
@@ -38,8 +37,8 @@ struct SplashPage {
         }
       }
       // TODO：
-      .position({x: '50%', y: '80%'})
-      .translate({x: '-50%'})
+      .position({ x: '50%', y: '80%' })
+      .translate({ x: '-50%' })
 
     }.width('100%').height('100%')
 

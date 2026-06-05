@@ -3,7 +3,8 @@
     "pages/Index",
     "pages/LoginPageDemo",
     "pages/SplashPage",
-    "pages/LoginPage"
+    "pages/LoginPage",
+    "pages/MainPage"
 
   ]
 }
