@@ -1,0 +1,1 @@
+export const EXAMPLE_URL: string = 'http://192.168.41.1:8080'
