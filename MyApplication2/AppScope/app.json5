@@ -4,7 +4,9 @@
     "vendor": "example",
     "versionCode": 1000000,
     "versionName": "1.0.0",
+//    TODO:
     "icon": "$media:github",
+//    TODO：
     "label": "$string:app_name"
   }
 }

@@ -17,7 +17,6 @@ interface LoginResponse {
   token?: string; // token 是可选的，因为如果 code 是 400 可能就没有 token
 }
 
-// TODO:
 @Entry
 @Component
 struct LoginPage {
@@ -29,6 +28,7 @@ struct LoginPage {
     let options: http.HttpRequestOptions = {
       method: http.RequestMethod.POST, // 可选，默认为http.RequestMethod.GET。
       // 当使用POST请求时此字段用于传递请求体内容，具体格式与服务端协商确定。
+      // TODO: 1
       extraData: JSON.stringify({
         phone: this.phonenumber,
         password: this.password
@@ -37,7 +37,7 @@ struct LoginPage {
       usingCache: true, // 可选，默认为true。
       priority: 1, // 可选，默认为1。
       // 开发者根据自身业务需要添加header字段。
-      // TODO: 1
+      // TODO: 2
       header: { 'Content-Type': 'application/json' },
       // header: new Header('application/json')
       readTimeout: 60000, // 可选，默认为60000ms。
@@ -46,7 +46,7 @@ struct LoginPage {
       usingProxy: false, //可选，默认不使用网络代理，自API 10开始支持该属性。
     };
 
-    // TODO: 2
+    // TODO: 3
     httpRequest.request(EXAMPLE_URL + '/api/community/user/phone/login', options,
       (err: Error, data: http.HttpResponse) => {
         if (!err) {
@@ -55,19 +55,22 @@ struct LoginPage {
           // console.info('type:' + JSON.stringify(data.resultType));
           // console.info('header:' + JSON.stringify(data.header));
           // console.info('cookies:' + data.cookies); // 自API version 8开始支持cookie。
-          // TODO: 3
+          // TODO: 4
           let res = JSON.parse(data.result as string) as LoginResponse;
           if (res.code === 200) {
             console.info('zzz:SUCCESS,Token:' + res.token)
             AppStorage.SetOrCreate("token", res.token)
-            router.pushUrl({ url: 'pages/MainPage' })
+            router.replace({ url: 'pages/MainPage' })
+            // router.pushUrl({ url: 'pages/MainPage' })
           } else {
-            console.info('zzz:error:' + JSON.stringify(err));
-            // TODO: 4
+            console.info(JSON.stringify(err));
+            // TODO: 5
             promptAction.showToast({ message: res.msg, duration: 2000 })
           }
         } else {
+          // TODO:
           console.info('zzz:error:' + JSON.stringify(err));
+          // console.info('error:' + JSON.stringify(err));
         }
       });
   }

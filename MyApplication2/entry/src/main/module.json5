@@ -14,6 +14,7 @@
       {
         "name": "EntryAbility",
         "srcEntry": "./ets/entryability/EntryAbility.ets",
+//        TODO:
         "description": "$string:EntryAbility_desc",
         "icon": "$media:github",
         "label": "$string:EntryAbility_label",
@@ -43,7 +44,7 @@
             "name": "ohos.extension.backup",
             "resource": "$profile:backup_config"
           }
-        ],
+        ]
       }
     ],
     "requestPermissions": [

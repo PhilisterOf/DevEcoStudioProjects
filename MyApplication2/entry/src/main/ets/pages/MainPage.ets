@@ -1,7 +1,6 @@
 import { http } from '@kit.NetworkKit';
 import { EXAMPLE_URL } from '../common/httpstool';
 import { promptAction } from '@kit.ArkUI';
-import { it } from '@ohos/hypium';
 
 // TODO:
 // class Header {
@@ -39,6 +38,7 @@ struct MainPage {
     // promptAction.showToast({ message: this.token, duration: 2000 })
     let httpRequest = http.createHttp();
     let options: http.HttpRequestOptions = {
+      // TODO:
       method: http.RequestMethod.GET, // 可选，默认为http.RequestMethod.GET。
       // 当使用POST请求时此字段用于传递请求体内容，具体格式与服务端协商确定。
       // TODO:
@@ -75,6 +75,7 @@ struct MainPage {
             promptAction.showToast({ message: 'ERROR!', duration: 2000 })
           }
         } else {
+          // TODO:
           console.info('error:' + JSON.stringify(err));
         }
       });
@@ -145,7 +146,7 @@ struct MainPage {
         .width('100%')
       Column({ space: 10 }) {
 
-
+        // TODO:
         ForEach(this.listDetail, (item: ListDetail, index: number) => {
           Column() {
             Text('id:' + item.id)

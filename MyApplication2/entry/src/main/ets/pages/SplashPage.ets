@@ -10,6 +10,7 @@ struct SplashPage {
   // }
 
   build() {
+    // TODO:
     Stack({ alignContent: Alignment.TopEnd }) {
       // TODO:
       Image($r('app.media.macOS'))
